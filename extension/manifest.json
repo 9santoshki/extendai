@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "AI Agent Browser",
+  "version": "1.0.0",
+  "description": "An AI-powered agent that can browse, understand, and interact with webpages autonomously",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "action": {
+    "default_popup": "",
+    "default_title": "AI Agent Browser",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "ui/options.html",
+  "options_ui": {
+    "page": "ui/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/content.js"],
+      "css": ["styles/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["ui/sidebar.html", "styles/sidebar.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

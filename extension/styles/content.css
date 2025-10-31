@@ -1,0 +1,30 @@
+/* Content script styles for AI Agent Browser Extension */
+
+/* Ensure sidebar doesn't interfere with page content */
+#ai-agent-sidebar {
+  all: initial;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 400px !important;
+  height: 100vh !important;
+  border: none !important;
+  border-left: 2px solid #e0e0e0 !important;
+  z-index: 2147483647 !important;
+  background: white !important;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1) !important;
+}
+
+/* Highlight animation for elements */
+@keyframes ai-agent-highlight {
+  0%, 100% {
+    outline-offset: 0px;
+  }
+  50% {
+    outline-offset: 4px;
+  }
+}
+
+.ai-agent-highlighted {
+  animation: ai-agent-highlight 1s ease-in-out;
+}

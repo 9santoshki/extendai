@@ -1,0 +1,17 @@
+INFO:     Started server process [4579]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51466 - "GET /health HTTP/1.1" 200 OK
+[Planner] Creating plan for: List the top 3 news headlines you see
+[Analyzer] Analyzing page...
+[Executor] Generating actions...
+INFO:     127.0.0.1:51468 - "POST /api/task HTTP/1.1" 200 OK
+[Planner] Creating plan for: hi
+[Analyzer] Analyzing page...
+[Executor] Generating actions...
+INFO:     127.0.0.1:51488 - "POST /api/task HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4579]

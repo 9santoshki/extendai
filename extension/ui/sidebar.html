@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Sidebar</title>
+  <link rel="stylesheet" href="../styles/sidebar.css">
+</head>
+<body>
+  <div class="sidebar-container">
+    <div class="sidebar-header">
+      <h2>🤖 AI Agent</h2>
+      <div class="header-actions">
+        <button id="settingsBtn" class="settings-btn" title="Settings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <button id="closeSidebar" class="close-btn">✕</button>
+      </div>
+    </div>
+    
+    <div class="sidebar-content">
+      <div class="chat-container" id="chatContainer">
+        <div class="welcome-message">
+          <p>👋 Hello! I'm your AI browsing agent.</p>
+          <p>I can help you interact with this webpage. Just tell me what you'd like to do!</p>
+          <p style="font-size: 12px; margin-top: 8px; color: #667eea;"><em>Responses now show concise final answers. Detailed processing steps are hidden for easier reading.</em></p>
+        </div>
+      </div>
+      
+      <div class="input-container">
+        <textarea id="chatInput" placeholder="Ask me to do something on this page..." rows="3"></textarea>
+        <button id="sendBtn" class="send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="sidebar.js"></script>
+</body>
+</html>

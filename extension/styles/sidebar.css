@@ -1,0 +1,339 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  scrollbar-width: auto; /* For Firefox */
+  scrollbar-color: #cccccc #f1f1f1; /* For Firefox */
+}
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: white;
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.sidebar-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-left: 1px solid #ddd;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 6px;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom: 2px solid #5568d3;
+}
+
+.sidebar-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.settings-btn, .close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+  padding: 0;
+}
+
+.settings-btn:hover, .close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.settings-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: white;
+  stroke-width: 2;
+}
+
+.sidebar-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: #f8f9fa;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #cccccc #f1f1f1; /* For Firefox */
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.chat-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+.welcome-message {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  margin-bottom: 15px;
+}
+
+.welcome-message p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.welcome-message p:last-child {
+  margin-bottom: 0;
+}
+
+.message {
+  margin-bottom: 15px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.user {
+  text-align: right;
+}
+
+.message.agent {
+  text-align: left;
+}
+
+.message-content {
+  display: inline-block;
+  max-width: 80%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.message.user .message-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.message.agent .message-content {
+  background: white;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-bottom-left-radius: 4px;
+}
+
+/* Format for structured agent responses */
+.response-section {
+  margin-bottom: 10px;
+}
+
+.response-section strong {
+  display: block;
+  color: #667eea;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.response-section p {
+  margin: 5px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.response-section ul {
+  margin: 5px 0;
+  padding-left: 20px;
+  font-size: 13px;
+}
+
+.response-section li {
+  margin-bottom: 3px;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 5px;
+}
+
+.typing-indicator {
+  display: inline-block;
+  padding: 12px 15px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  border-bottom-left-radius: 4px;
+}
+
+.typing-indicator span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #667eea;
+  margin: 0 2px;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+.input-container {
+  padding: 15px 20px;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+}
+
+#chatInput {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  transition: border-color 0.3s;
+  margin-bottom: 10px;
+}
+
+#chatInput:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.send-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.send-btn:active {
+  transform: translateY(0);
+}
+
+.send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.action-list {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.action-item {
+  padding: 6px;
+  margin: 4px 0;
+  background: white;
+  border-radius: 4px;
+  border-left: 3px solid #667eea;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 13px;
+  padding: 10px;
+  background: #f8d7da;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+\n/* Simple response styling for compact, user-friendly output */\n.simple-response {\n  padding: 12px;\n  border-radius: 8px;\n  background: #f8f9fa;\n  border-left: 3px solid #667eea;\n  margin-bottom: 10px;\n  line-height: 1.6;\n  color: #333;\n}\n\n.simple-response p {\n  margin: 0 0 8px 0;\n  line-height: 1.6;\n}\n\n.simple-response ul {\n  margin: 8px 0;\n  padding-left: 20px;\n}\n\n.simple-response li {\n  margin-bottom: 4px;\n}

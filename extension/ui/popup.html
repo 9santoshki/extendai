@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Browser</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 350px;
+      min-width: 300px;
+      min-height: 200px;
+      max-height: 400px;
+      margin: 0;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f7fa;
+      overflow-y: auto;
+      position: relative;
+      scrollbar-width: thin; /* For Firefox */
+      scrollbar-color: #cccccc #f1f1f1; /* For Firefox */
+    }
+    
+    /* For Webkit browsers (Chrome, Safari) */
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    body::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+    
+    body::-webkit-scrollbar-thumb {
+      background: #cccccc;
+      border-radius: 4px;
+    }
+    
+    body::-webkit-scrollbar-thumb:hover {
+      background: #999999;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .header-content {
+      flex: 1;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      color: #667eea;
+      margin-bottom: 5px;
+    }
+    
+    .header p {
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .settings-icon {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      color: #667eea;
+      background: none;
+      border: none;
+      padding: 4px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+      flex-shrink: 0; /* Prevents from shrinking */
+    }
+    
+    .settings-icon:hover {
+      background-color: rgba(102, 126, 234, 0.1);
+    }
+    
+    .settings-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+    
+    .info-section {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .info-section h3 {
+      color: #667eea;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .info-section p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin-top: 5px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-secondary {
+      background: #f5f5f5;
+      color: #667eea;
+    }
+    
+    .status {
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .status.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <h1>🤖 AI Agent Browser</h1>
+      <p>Powered by AI</p>
+    </div>
+    <button class="settings-icon" id="settingsBtn" title="Settings">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="info-section">
+    <h3>Chat Sidebar</h3>
+    <p>Click the extension icon on any webpage to open the AI agent sidebar. The sidebar allows continuous conversation and interaction with the current page.</p>
+  </div>
+  
+  <div class="info-section">
+    <h3>How to Use</h3>
+    <p>1. Navigate to any webpage</p>
+    <p>2. Click this extension icon</p>
+    <p>3. A chat sidebar will appear on the right side</p>
+    <p>4. Ask the AI to help you interact with the page</p>
+  </div>
+  
+  <button class="btn btn-secondary" id="openSettings">Configure Settings</button>
+  <button class="btn" id="apiStatusBtn">Check API Status</button>
+  
+  <div class="status" id="status"></div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('openSettings').addEventListener('click', () => {
+        // Open options page
+        if (chrome.runtime.openOptionsPage) {
+          chrome.runtime.openOptionsPage();
+        } else {
+          // Alternative: open options page in a new tab
+          chrome.tabs.create({url: chrome.runtime.getURL('ui/options.html')});
+        }
+      });
+      
+      document.getElementById('settingsBtn').addEventListener('click', () => {
+        // Same functionality as the "Configure Settings" button
+        if (chrome.runtime.openOptionsPage) {
+          chrome.runtime.openOptionsPage();
+        } else {
+          chrome.tabs.create({url: chrome.runtime.getURL('ui/options.html')});
+        }
+      });
+      
+      document.getElementById('apiStatusBtn').addEventListener('click', async () => {
+        // Check API configuration status
+        const settings = await new Promise(resolve => {
+          chrome.storage.sync.get([
+            'apiKey', 'apiProvider'
+          ], resolve);
+        });
+        
+        const statusDiv = document.getElementById('status');
+        if (settings.apiKey) {
+          statusDiv.textContent = `API: ${settings.apiProvider || 'OpenAI'} is configured ✓`;
+          statusDiv.className = 'status success show';
+        } else {
+          statusDiv.textContent = 'Please configure your API key in the extension settings.';
+          statusDiv.className = 'status error show';
+        }
+        
+        setTimeout(() => {
+          statusDiv.classList.remove('show');
+        }, 5000);
+      });
+      
+      // Check initial status
+      setTimeout(async () => {
+        const settings = await new Promise(resolve => {
+          chrome.storage.sync.get(['apiKey'], resolve);
+        });
+        
+        if (!settings.apiKey) {
+          const statusDiv = document.getElementById('status');
+          statusDiv.textContent = '⚠️ API key not configured';
+          statusDiv.className = 'status error show';
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+╔════════════════════════════════════════════════════════════╗
+║  AI Agent Backend - FastAPI Service                       ║
+║  Hybrid LangChain + Multi-Agent System                    ║
+╚════════════════════════════════════════════════════════════╝
+
+🔧 Activating virtual environment...
+📥 Installing dependencies...
+✓ Dependencies installed
+
+✓ Configuration loaded
+
+🚀 Starting FastAPI server...
+   URL: http://localhost:8000
+   Docs: http://localhost:8000/docs
+
+Press Ctrl+C to stop
+─────────────────────────────────────────────────────────────
+
+INFO:     Started server process [95730]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59151 - "GET /health HTTP/1.1" 200 OK
+/Users/sk/sk/proj/ai-agent-clean/backend/agents/multi_agent.py:39: LangChainDeprecationWarning: The method `BaseChatModel.predict` was deprecated in langchain-core 0.1.7 and will be removed in 1.0. Use :meth:`~invoke` instead.
+  response = self.llm.predict(full_prompt)
+[Planner] Creating plan for: What is this page about?
+[Analyzer] Analyzing page...
+[Executor] Generating actions...
+INFO:     127.0.0.1:59154 - "POST /api/task HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59193 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59193 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59198 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59198 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59203 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59203 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59227 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59227 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59261 - "GET /health HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say "Connection successful" - this is a test to verify API connectivity
+[Analyzer] Analyzing page...
+[Executor] Generating actions...
+INFO:     127.0.0.1:59264 - "POST /api/task HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59279 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59279 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59288 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59288 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59320 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59320 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:59324 - "GET / HTTP/1.1" 200 OK
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+INFO:     127.0.0.1:59324 - "POST /api/task HTTP/1.1" 500 Internal Server Error
+[Planner] Creating plan for: Just say 'Connection successful' - this is a test to verify API connectivity
+[Analyzer] Analyzing page...
+[Executor] Generating actions...
+INFO:     127.0.0.1:59356 - "POST /api/task HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [95730]
