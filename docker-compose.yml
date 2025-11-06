@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  ai-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai-agent-backend
+    ports:
+      - "8001:8001"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-ollama}
+      - CHAT_MODEL=${CHAT_MODEL:-qwen2.5:0.5b}
+      - REASONING_MODEL=${REASONING_MODEL:-qwen2.5:7b}
+      - BASE_URL=${BASE_URL:-http://host.docker.internal:11434/v1}
+      - PORT=8001
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./backend/.env:/app/.env:ro
+    networks:
+      - ai-agent-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  ai-agent-network:
+    driver: bridge

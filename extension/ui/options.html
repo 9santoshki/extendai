@@ -370,9 +370,38 @@
           <input type="text" id="apiEndpoint" placeholder="https://api.example.com/v1/chat/completions">
         </div>
         
-        <div class="input-group" id="modelGroup">
-          <label for="modelName">Model Name <span class="label-help">(optional, uses default if empty)</span></label>
-          <input type="text" id="modelName" placeholder="e.g., gpt-4, deepseek-chat, qwen-plus">
+        <div class="input-group" id="chatModelGroup">
+          <label for="chatModelName">Chat Model Name <span class="label-help">(for agent interactions)</span></label>
+          <select id="chatModelName">
+            <option value="">Use default (gpt-4)</option>
+            <option value="gpt-4">GPT-4 (OpenAI)</option>
+            <option value="gpt-4o">GPT-4o (OpenAI)</option>
+            <option value="gpt-3.5-turbo">GPT-3.5 Turbo (OpenAI)</option>
+            <option value="deepseek-chat">DeepSeek Chat</option>
+            <option value="qwen-plus">Qwen Plus</option>
+            <option value="qwen-max">Qwen Max</option>
+            <option value="llama3">Llama 3</option>
+            <option value="mixtral">Mixtral</option>
+            <option value="mistral">Mistral</option>
+            <option value="command-r">Command R+</option>
+          </select>
+        </div>
+        
+        <div class="input-group" id="reasoningModelGroup">
+          <label for="reasoningModelName">Reasoning Model Name <span class="label-help">(for analytical tasks)</span></label>
+          <select id="reasoningModelName">
+            <option value="">Use default (gpt-4)</option>
+            <option value="gpt-4">GPT-4 (OpenAI)</option>
+            <option value="gpt-4o">GPT-4o (OpenAI)</option>
+            <option value="gpt-3.5-turbo">GPT-3.5 Turbo (OpenAI)</option>
+            <option value="deepseek-chat">DeepSeek Chat</option>
+            <option value="qwen-plus">Qwen Plus</option>
+            <option value="qwen-max">Qwen Max</option>
+            <option value="llama3">Llama 3</option>
+            <option value="mixtral">Mixtral</option>
+            <option value="mistral">Mistral</option>
+            <option value="command-r">Command R+</option>
+          </select>
         </div>
       </div>
       

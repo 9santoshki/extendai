@@ -54,8 +54,8 @@ echo ""
 
 # Start the server
 echo "🚀 Starting FastAPI server..."
-echo "   URL: http://localhost:${PORT:-8000}"
-echo "   Docs: http://localhost:${PORT:-8000}/docs"
+echo "   URL: http://localhost:${PORT:-8001}"
+echo "   Docs: http://localhost:${PORT:-8001}/docs"
 echo ""
 echo "Press Ctrl+C to stop"
 echo "─────────────────────────────────────────────────────────────"

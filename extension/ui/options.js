@@ -5,7 +5,8 @@ const DEFAULT_SETTINGS = {
   apiProvider: 'openai',
   apiKey: '',
   apiEndpoint: '',
-  modelName: '',
+  chatModelName: '',
+  reasoningModelName: '',
   temperature: 0.7,
   maxTokens: 1500,
   actionDelay: 500,
@@ -131,7 +132,8 @@ async function loadSettings() {
     document.getElementById('apiProvider').value = settings.apiProvider;
     document.getElementById('apiKey').value = settings.apiKey;
     document.getElementById('apiEndpoint').value = settings.apiEndpoint;
-    document.getElementById('modelName').value = settings.modelName;
+    document.getElementById('chatModelName').value = settings.chatModelName;
+    document.getElementById('reasoningModelName').value = settings.reasoningModelName;
     document.getElementById('temperature').value = settings.temperature * 10;
     document.getElementById('temperatureValue').textContent = settings.temperature.toFixed(1);
     document.getElementById('maxTokens').value = settings.maxTokens;
@@ -165,7 +167,8 @@ async function saveSettings() {
     apiProvider: document.getElementById('apiProvider').value,
     apiKey: document.getElementById('apiKey').value.trim(),
     apiEndpoint: document.getElementById('apiEndpoint').value.trim(),
-    modelName: document.getElementById('modelName').value.trim(),
+    chatModelName: document.getElementById('chatModelName').value.trim(),
+    reasoningModelName: document.getElementById('reasoningModelName').value.trim(),
     temperature: parseFloat(document.getElementById('temperature').value) / 10,
     maxTokens: parseInt(document.getElementById('maxTokens').value),
     actionDelay: parseInt(document.getElementById('actionDelay').value),
@@ -310,7 +313,8 @@ async function testApiConnection(settings) {
   // Format config for backend - using 'ollama' as API key for local models
   const config = {
     api_key: settings.apiKey || 'ollama',  // Use 'ollama' if no API key provided (for local models)
-    model: settings.modelName || 'qwen2.5',  // Use the model specified in settings
+    chat_model: settings.chatModelName || 'gpt-4',  // Use the chat model specified in settings
+    reasoning_model: settings.reasoningModelName || 'gpt-4',  // Use the reasoning model specified in settings
     base_url: settings.apiEndpoint || 'http://localhost:11434/v1',  // Default to Ollama if not specified
     personality: settings.agentPersonality || 'a helpful and friendly AI browsing assistant'
   };

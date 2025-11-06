@@ -423,7 +423,7 @@ def create_hybrid_system(api_key: str, model: str = "gpt-4", base_url: Optional[
     
     Args:
         api_key: OpenAI API key (or compatible)
-        model: Model name
+        model: Model name to use for the agent system
         base_url: Optional custom base URL for API
         
     Returns:
@@ -432,7 +432,7 @@ def create_hybrid_system(api_key: str, model: str = "gpt-4", base_url: Optional[
     
     llm_kwargs = {
         "api_key": api_key,
-        "model": model,
+        "model": model,  # Now this will be the chat model specifically
         "temperature": 0.7,
         "max_tokens": 1500
     }

@@ -77,7 +77,8 @@ async function handleAgentExecution(task, tabId) {
     // Format config for the backend - the base_url should point to Ollama API, not the task endpoint
     const config = {
       api_key: settings.apiKey,
-      model: settings.modelName || 'qwen2.5:0.5b',
+      chat_model: settings.chatModelName || 'qwen2.5:0.5b',
+      reasoning_model: settings.reasoningModelName || 'qwen2.5:0.5b',
       base_url: 'http://localhost:11434/v1', // Ollama API endpoint for the LLM
       personality: settings.agentPersonality || 'a helpful and friendly AI browsing assistant'
     };
@@ -253,6 +254,7 @@ Example responses:
 Be conversational and helpful! Respond ONLY with valid JSON, no additional text.`;
 
   try {
+    // Use chat model for agent interactions
     const apiConfig = getApiConfig(settings);
     
     if (settings.verboseLogging) {
@@ -264,7 +266,7 @@ Be conversational and helpful! Respond ONLY with valid JSON, no additional text.
     }
     
     const requestBody = {
-      model: apiConfig.model,
+      model: settings.chatModelName || apiConfig.model, // Use chat model if available, fallback to apiConfig
       messages: [
         { role: 'system', content: 'You are an AI agent that analyzes webpages and determines actions. Always respond with valid JSON only.' },
         { role: 'user', content: prompt }
@@ -327,7 +329,8 @@ async function getSettings() {
       apiProvider: 'openai',
       apiKey: '',
       apiEndpoint: '',
-      modelName: '',
+      chatModelName: '',
+      reasoningModelName: '',
       temperature: 0.7,
       maxTokens: 1500,
       actionDelay: 500,
@@ -427,19 +430,19 @@ function getApiConfig(settings) {
   const providers = {
     openai: {
       endpoint: 'https://api.openai.com/v1/chat/completions',
-      model: settings.modelName || 'gpt-4'
+      model: settings.chatModelName || 'gpt-4'
     },
     deepseek: {
       endpoint: 'https://api.deepseek.com/v1/chat/completions',
-      model: settings.modelName || 'deepseek-chat'
+      model: settings.chatModelName || 'deepseek-chat'
     },
     qwen: {
       endpoint: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
-      model: settings.modelName || 'qwen-plus'
+      model: settings.chatModelName || 'qwen-plus'
     },
     custom: {
       endpoint: settings.apiEndpoint || 'https://api.openai.com/v1/chat/completions',
-      model: settings.modelName || 'gpt-4'
+      model: settings.chatModelName || 'gpt-4'
     }
   };
   

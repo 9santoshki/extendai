@@ -13,6 +13,10 @@ import sys
 
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import Config
+
+# Add parent directory to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from agents.multi_agent import create_hybrid_system, HybridMultiAgentSystem
 from chains.reasoning_chains import ReasoningChains
@@ -44,7 +48,8 @@ reasoning_chains: Dict[str, ReasoningChains] = {}
 class AgentConfig(BaseModel):
     """Configuration for the agent system"""
     api_key: str = Field(..., description="API key for LLM")
-    model: str = Field(default="gpt-4", description="Model name")
+    chat_model: str = Field(default="gpt-4", description="Model name for chat interactions")
+    reasoning_model: str = Field(default="gpt-4", description="Model name for reasoning tasks")
     base_url: Optional[str] = Field(None, description="Custom API base URL")
     personality: str = Field(
         default="a helpful and friendly AI browsing assistant",
@@ -108,7 +113,7 @@ def get_or_create_agent_system(session_id: str, config: AgentConfig) -> HybridMu
     if session_id not in agent_systems:
         agent_systems[session_id] = create_hybrid_system(
             api_key=config.api_key,
-            model=config.model,
+            model=config.chat_model,  # Use chat model for the agent system
             base_url=config.base_url
         )
     return agent_systems[session_id]
@@ -119,7 +124,7 @@ def get_or_create_reasoning_chains(session_id: str, config: AgentConfig) -> Reas
     if session_id not in reasoning_chains:
         llm_kwargs = {
             "api_key": config.api_key,
-            "model": config.model,
+            "model": config.reasoning_model,  # Use reasoning model for reasoning chains
             "temperature": 0.7
         }
         if config.base_url:
@@ -279,7 +284,7 @@ async def test_multi_agent_system(config: AgentConfig):
     try:
         agent_system = create_hybrid_system(
             api_key=config.api_key,
-            model=config.model,
+            model=config.chat_model,  # Use chat model for the agent system
             base_url=config.base_url
         )
         
